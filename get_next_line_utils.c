@@ -6,7 +6,7 @@
 /*   By: microdri <microdr@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 13:25:53 by microdri          #+#    #+#             */
-/*   Updated: 2022/06/10 18:18:15 by microdri         ###   ########.fr       */
+/*   Updated: 2022/06/13 18:36:26 by microdri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,30 @@ size_t	ft_strlen(const char *str)
 char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*temp;
-	int		i;
-	int		j;
+	int		flag;
+	int		len;
 
-	i = 0;
-	j = 0;
-	if (!s1 || !s2)
+	flag = 0;
+	if (!s2)
 		return (NULL);
-	temp = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!s1)
+	{
+		s1 = malloc(1);
+		s1[0] = 0;
+		flag++;
+	}
+	len = ft_strlen(s1) + ft_strlen(s2);
+	temp = malloc(len + 1);
 	if (!temp)
 		return (NULL);
-	while (s1[i] != '\0')
-	{
-		temp[i] = ((char *)s1)[i];
-		i++;
-	}
-	while (s2[j] != '\0')
-		temp[i++] = s2[j++];
-	temp[i] = '\0';
-	return (temp);
+	while (*s1)
+		*temp++ = *s1++;
+	while (*s2)
+		*temp++ = *s2++;
+	*temp = '\0';
+	if (flag == 1)
+		free(s1);
+	return (temp - len);
 }
 
 char	*ft_strchr(char *s, int c)

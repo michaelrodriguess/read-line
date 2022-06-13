@@ -6,7 +6,7 @@
 /*   By: microdri <microdr@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 16:57:18 by microdri          #+#    #+#             */
-/*   Updated: 2022/06/10 10:36:18 by microdri         ###   ########.fr       */
+/*   Updated: 2022/06/13 14:13:22 by microdri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 # define GET_NEXT_LINE_H
 # include <stdlib.h>
 # include <unistd.h>
-
-//# ifndef BUFFER_SIZE
-//# define BUFFER_SIZE 42
-//# endif 
 
 char	*get_next_line(int fd);
 char	*ft_strjoin(char *s1, char *s2);
