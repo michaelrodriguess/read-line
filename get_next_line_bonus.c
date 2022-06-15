@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: microdri <microdr@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:23:00 by microdri          #+#    #+#             */
-/*   Updated: 2022/06/15 14:04:03 by microdri         ###   ########.fr       */
+/*   Updated: 2022/06/15 20:25:52 by microdri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*get_line(int fd, char *bank)
 {	
@@ -93,16 +93,16 @@ char	*get_latter_lf(char *bank)
 
 char	*get_next_line(int fd)
 {
-	static char *bank;
+	static char *bank[4096] = {0};
 	char *out;
 
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
-	bank = get_line(fd, bank);
-	if (!bank)
+	bank[fd] = get_line(fd, bank[fd]);
+	if (!bank[fd])
 		return (NULL);
-	out = get_until_lf(bank);
-	bank = get_latter_lf(bank);
+	out = get_until_lf(bank[fd]);
+	bank[fd] = get_latter_lf(bank[fd]);
 
 	return (out);
 }
